@@ -1,0 +1,285 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2761
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <div id="sonic-map-shell">\
+  <div class="map-stage">\
+    <img src="https://res.cloudinary.com/dmz2khs5l/image/upload/v1773459916/map_fwntdn.jpg" alt="World map outline" class="map-image">\
+\
+    <canvas id="sg-particles"></canvas>\
+\
+    <button class="map-pin california" data-country="California, United States" aria-label="California, United States"></button>\
+    <button class="map-pin tulum" data-country="Tulum, Mexico" aria-label="Tulum, Mexico"></button>\
+    <button class="map-pin peru" data-country="Sacred Valley, Peru" aria-label="Sacred Valley, Peru"></button>\
+  </div>\
+\
+  <div class="map-card" id="mapCard">\
+    <button class="close-card" id="closeCard" aria-label="Close">\'d7</button>\
+    <div class="card-image"></div>\
+    <h3 id="cardCountry">Location</h3>\
+    <p id="cardDescription">Brief description goes here.</p>\
+    <div class="card-sounds"></div>\
+  </div>\
+</div>\
+\
+<style>\
+#sonic-map-shell\{\
+  position: relative;\
+  width: 100%;\
+  max-width: 1100px;\
+  margin: 0 auto;\
+  background: #000;\
+\}\
+\
+.map-stage\{\
+  position: relative;\
+  width: 100%;\
+  overflow: hidden;\
+  background: #000;\
+\}\
+\
+.map-image\{\
+  display:block;\
+  width:106%;\
+  height:auto;\
+  margin-left:-3%;\
+  margin-top:-3%;\
+  opacity:.95;\
+  position: relative;\
+  z-index: 1;\
+\}\
+\
+#sg-particles\{\
+  position:absolute;\
+  inset:0;\
+  width:100%;\
+  height:100%;\
+  pointer-events:none;\
+  z-index:2;\
+\}\
+\
+.map-pin\{\
+  position: absolute;\
+  width: 22px;\
+  height: 22px;\
+  border: 2px solid rgba(255,255,255,0.95);\
+  border-radius: 999px;\
+  background: rgba(255,255,255,0.08);\
+  box-shadow:\
+    0 0 0 0 rgba(255,255,255,0.45),\
+    0 0 14px rgba(255,255,255,0.55),\
+    0 0 28px rgba(255,255,255,0.2);\
+  cursor: pointer;\
+  transform: translate(-50%, -50%);\
+  z-index: 3;\
+\}\
+\
+.map-pin::before\{\
+  content: "";\
+  position: absolute;\
+  inset: -8px;\
+  border: 1px solid rgba(255,255,255,0.35);\
+  border-radius: 999px;\
+  animation: sonicPulse 2.2s ease-out infinite;\
+\}\
+\
+.map-pin:hover\{\
+  box-shadow:\
+    0 0 0 0 rgba(255,255,255,0.55),\
+    0 0 18px rgba(255,255,255,0.8),\
+    0 0 34px rgba(255,255,255,0.28);\
+\}\
+\
+@keyframes sonicPulse \{\
+  0% \{\
+    transform: scale(0.8);\
+    opacity: 0.9;\
+  \}\
+  100% \{\
+    transform: scale(1.8);\
+    opacity: 0;\
+  \}\
+\}\
+\
+/* your updated pin positions */\
+.california \{ left: 14%; top: 50%; \}\
+.tulum      \{ left: 21%; top: 58%; \}\
+.peru       \{ left: 24%; top: 69%; \}\
+\
+.map-card\{\
+  position: absolute;\
+  right: 4%;\
+  top: 10%;\
+  width: min(360px, 88%);\
+  background: rgba(5,5,5,0.96);\
+  border: 1px solid rgba(255,255,255,0.18);\
+  box-shadow: 0 12px 40px rgba(0,0,0,0.45);\
+  padding: 18px;\
+  color: #f4f4f4;\
+  z-index: 5;\
+  display: none;\
+  backdrop-filter: blur(6px);\
+\}\
+\
+.map-card.active\{\
+  display: block;\
+\}\
+\
+.close-card\{\
+  position: absolute;\
+  top: 8px;\
+  right: 10px;\
+  background: none;\
+  border: 0;\
+  color: #fff;\
+  font-size: 24px;\
+  cursor: pointer;\
+  line-height: 1;\
+\}\
+\
+.card-image\{\
+  width: 100%;\
+  height: 120px;\
+  background: rgba(255,255,255,0.06);\
+  border: 1px solid rgba(255,255,255,0.08);\
+  margin-bottom: 14px;\
+\}\
+\
+.map-card h3\{\
+  margin: 0 0 10px;\
+  font-family: inherit;\
+  font-size: 24px;\
+  letter-spacing: 0.04em;\
+\}\
+\
+.map-card p\{\
+  margin: 0 0 14px;\
+  font-family: inherit;\
+  font-size: 14px;\
+  line-height: 1.5;\
+  color: rgba(255,255,255,0.8);\
+\}\
+\
+.card-sounds\{\
+  display: grid;\
+  gap: 10px;\
+\}\
+\
+.sound-row\{\
+  border: 1px solid rgba(255,255,255,0.16);\
+  padding: 10px 12px;\
+  font-size: 13px;\
+  color: rgba(255,255,255,0.92);\
+  background: rgba(255,255,255,0.03);\
+\}\
+\
+@media (max-width: 768px)\{\
+  .map-pin\{\
+    width: 18px;\
+    height: 18px;\
+  \}\
+\
+  .map-card\{\
+    position: relative;\
+    right: auto;\
+    top: auto;\
+    left: auto;\
+    bottom: auto;\
+    transform: none;\
+    width: 100%;\
+    margin-top: 18px;\
+  \}\
+\}\
+</style>\
+\
+<script>\
+const sonicData = \{\
+  "California, United States": \{\
+    description: "Brief description for California, United States goes here.",\
+    sounds: ["Sound 01", "Sound 02", "Sound 03"]\
+  \},\
+  "Tulum, Mexico": \{\
+    description: "Brief description for Tulum, Mexico goes here.",\
+    sounds: ["Sound 01", "Sound 02", "Sound 03"]\
+  \},\
+  "Sacred Valley, Peru": \{\
+    description: "Brief description for Sacred Valley, Peru goes here.",\
+    sounds: ["Sound 01", "Sound 02", "Sound 03"]\
+  \}\
+\};\
+\
+const pins = document.querySelectorAll("#sonic-map-shell .map-pin");\
+const card = document.getElementById("mapCard");\
+const cardCountry = document.getElementById("cardCountry");\
+const cardDescription = document.getElementById("cardDescription");\
+const closeCard = document.getElementById("closeCard");\
+const soundRows = card.querySelector(".card-sounds");\
+\
+pins.forEach(pin => \{\
+  pin.addEventListener("click", () => \{\
+    const country = pin.dataset.country;\
+    const data = sonicData[country];\
+\
+    cardCountry.textContent = country;\
+    cardDescription.textContent = data.description;\
+    soundRows.innerHTML = data.sounds.map(sound => `<div class="sound-row">$\{sound\}</div>`).join("");\
+    card.classList.add("active");\
+  \});\
+\});\
+\
+closeCard.addEventListener("click", () => \{\
+  card.classList.remove("active");\
+\});\
+\
+/* particles */\
+const canvas = document.getElementById("sg-particles");\
+const ctx = canvas.getContext("2d");\
+\
+function resizeParticles()\{\
+  const stage = document.querySelector(".map-stage");\
+  canvas.width = stage.clientWidth;\
+  canvas.height = stage.clientHeight;\
+\}\
+resizeParticles();\
+window.addEventListener("resize", resizeParticles);\
+\
+const particles = [];\
+const particleCount = 200;\
+\
+for(let i = 0; i < particleCount; i++)\{\
+  particles.push(\{\
+    x: Math.random() * canvas.width,\
+    y: Math.random() * canvas.height,\
+    size: Math.random() * 2 + 0.4,\
+    speedX: (Math.random() - 0.5) * 0.65,\
+    speedY: (Math.random() - 0.5) * 0.65,\
+    opacity: Math.random() * 0.25 + 0.08\
+  \});\
+\}\
+\
+function drawParticles()\{\
+  ctx.clearRect(0, 0, canvas.width, canvas.height);\
+\
+  particles.forEach(p => \{\
+    p.x += p.speedX;\
+    p.y += p.speedY;\
+\
+    if(p.x > canvas.width) p.x = 0;\
+    if(p.x < 0) p.x = canvas.width;\
+    if(p.y > canvas.height) p.y = 0;\
+    if(p.y < 0) p.y = canvas.height;\
+\
+    ctx.beginPath();\
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);\
+    ctx.fillStyle = `rgba(255,255,255,$\{p.opacity\})`;\
+    ctx.fill();\
+  \});\
+\
+  requestAnimationFrame(drawParticles);\
+\}\
+\
+drawParticles();\
+</script>}
